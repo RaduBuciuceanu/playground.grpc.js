@@ -1,5 +1,5 @@
-const grpc = require('@grpc/grpc-js')
-const loader = require('@grpc/proto-loader')
+import grpc from '@grpc/grpc-js'
+import loader from '@grpc/proto-loader'
 
 const definition = loader.loadSync('src/identity.proto')
 
