@@ -1,3 +1,4 @@
 .dist/
+.swc/
 .idea/
 node_modules/
