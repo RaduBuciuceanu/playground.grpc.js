@@ -1,24 +1,6 @@
-import grpc from '@grpc/grpc-js'
-import loader from '@grpc/proto-loader'
+import { make } from 'src/server/make.mjs'
 
-const definition = loader.loadSync('src/identity.proto')
-
-const Auth = grpc.loadPackageDefinition(definition)['Identity']['Auth']
-
-const server = new grpc.Server()
-
-const PORT = '0.0.0.0:4000'
-
-const CREDENTIALS = grpc.ServerCredentials.createInsecure()
-
-const setup = () => {
-  setupAuthService()
-  server.start()
-}
-
-server.bindAsync(PORT, CREDENTIALS, setup)
-
-const setupAuthService = () => server.addService(Auth.service, {
+const authService = server => server.addService(make.auth().service, {
   Login: (_call, callback) => {
     console.log('login')
     callback(null, '')
@@ -40,4 +22,8 @@ const setupAuthService = () => server.addService(Auth.service, {
     call.write({ userName: 'five' })
     call.end()
   }
+})
+
+export const setup = server => ({
+  authService: () => authService(server)
 })
