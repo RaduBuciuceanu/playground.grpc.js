@@ -8,7 +8,8 @@ const CREDENTIALS = grpc.ServerCredentials.createInsecure()
 const server = new grpc.Server()
 
 const setupServer = () => {
-  setup.authService(server)
+  const configure = setup(server)
+  configure.authService(server)
   server.start()
 }
 
