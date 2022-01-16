@@ -1,9 +1,18 @@
+import { tap } from 'rxjs'
 import { auth } from 'src/client/repositories/auth/index.mjs'
 
-auth.login().then(() => console.log("login"))
+auth.login()
+  .pipe(tap(() => console.log('login')))
+  .subscribe()
 
-auth.logout().then(() => console.log("logout"))
+auth.logout()
+  .pipe(tap(() => console.log('logout')))
+  .subscribe()
 
-auth.refresh().then(() => console.log("refresh"))
+auth.refresh()
+  .pipe(tap(() => console.log('refresh')))
+  .subscribe()
 
-auth.userConnected().then(() => console.log("connected"))
+auth.userConnected()
+  .pipe(tap(({ message, stream }) => console.log('connected', message)))
+  .subscribe()
