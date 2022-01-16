@@ -1,14 +1,24 @@
 {
   "name": "playground.grpc.js",
   "version": "1.0.0",
-  "main": "src/server/index.mjs",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "start:server": "node src/server/index.mjs",
-    "start:client": "node src/client/index.mjs"
+    "start:server": "node .dist/server/main.js",
+    "start:client": "node .dist/client/main.js",
+    "build:server": "webpack -c .pack/config.js -o .dist/server ./src/server/index.mjs",
+    "build:client": "webpack -c .pack/config.js -o .dist/client ./src/client/index.mjs"
   },
   "dependencies": {
     "@grpc/grpc-js": "1.5.1",
     "@grpc/proto-loader": "0.6.9"
+  },
+  "devDependencies": {
+    "@swc/core": "1.2.129",
+    "regenerator-runtime": "0.13.9",
+    "swc-loader": "0.1.15",
+    "webpack": "5.66.0",
+    "webpack-cli": "4.9.1",
+    "webpack-node-externals": "3.0.0"
   }
 }
