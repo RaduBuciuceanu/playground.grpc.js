@@ -1,30 +1,9 @@
-import grpc from '@grpc/grpc-js'
-import loader from '@grpc/proto-loader'
+import { auth } from 'src/client/repositories/auth/index.mjs'
 
-const definition = loader.loadSync('src/identity.proto')
+auth.login().then(() => console.log("login"))
 
-const Auth = grpc.loadPackageDefinition(definition)['Identity']['Auth']
+auth.logout().then(() => console.log("logout"))
 
-const auth = new Auth('localhost:4000', grpc.credentials.createInsecure())
+auth.refresh().then(() => console.log("refresh"))
 
-auth.Login('', (_error, _response) => {
-  console.log('login response')
-})
-
-auth.Refresh('', (_error, _response) => {
-  console.log('refresh response')
-})
-
-auth.Logout('', (_error, _response) => {
-  console.log('logout response')
-})
-
-const stream = auth.UserConnected()
-
-stream.on('data', item => {
-  console.log(item)
-})
-
-stream.on('end', () => {
-  console.log('user connected done')
-})
+auth.userConnected().then(() => console.log("connected"))
