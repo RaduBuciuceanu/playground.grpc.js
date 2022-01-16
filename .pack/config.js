@@ -2,6 +2,7 @@ module.exports = {
   target: 'node16',
   mode: 'development',
   devtool: 'source-map',
+  stats: 'errors-only',
   externals: [
     require('webpack-node-externals')()
   ],
