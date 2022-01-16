@@ -4,8 +4,10 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start:server": "node .dist/server/main.js",
-    "start:client": "node .dist/client/main.js",
+    "dev:server": "concurrently \"yarn dev:server:serve\" \"yarn dev:server:transpile\" -n nodemon,webpack",
+    "dev:server:transpile": "webpack -c .pack/config.js -o .dist/server ./src/server/index.mjs --watch",
+    "dev:server:serve": "nodemon --watch .dist/server .dist/server/main.js",
+    "dev:client": "node .dist/client/main.js",
     "build:server": "webpack -c .pack/config.js -o .dist/server ./src/server/index.mjs",
     "build:client": "webpack -c .pack/config.js -o .dist/client ./src/client/index.mjs"
   },
@@ -15,6 +17,8 @@
   },
   "devDependencies": {
     "@swc/core": "1.2.129",
+    "concurrently": "7.0.0",
+    "nodemon": "2.0.15",
     "regenerator-runtime": "0.13.9",
     "swc-loader": "0.1.15",
     "webpack": "5.66.0",
