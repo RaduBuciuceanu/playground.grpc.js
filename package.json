@@ -1,11 +1,11 @@
 {
   "name": "playground.grpc.js",
   "version": "1.0.0",
-  "main": "src/server.mjs",
+  "main": "src/server/index.mjs",
   "license": "MIT",
   "scripts": {
-    "start:server": "node src/server.mjs",
-    "start:client": "node src/client.mjs"
+    "start:server": "node src/server/index.mjs",
+    "start:client": "node src/client/index.mjs"
   },
   "dependencies": {
     "@grpc/grpc-js": "1.5.1",
